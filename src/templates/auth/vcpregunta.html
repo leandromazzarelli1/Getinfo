@@ -1,0 +1,41 @@
+{% extends './baseinicio.html' %}
+{% block title %}Perfil{% endblock %}
+{% block body %}
+<main>
+    <section >
+        <form class="form">
+           <h2>Get Info</h2>
+               <div class="form-txt">
+                   <a>Ingrese su pregunta o problema</a>
+               </div>
+               <div class="input-group">
+               <textarea class="box"id="mensaje" cols="90" rows="10" placeholder="Empeza a contarnos..."></textarea>
+               <input type="submit" value="enviar" class="btn">
+           </div>
+              
+       </form>
+      
+   </section>
+   <section class="preguntas-frecuentes">
+       <div class="preguntas">
+           <h2>Preguntas Frecuentes</h2>
+           <div class="contenedor-preguntas">
+               <div class="contenedor-pregunta ">
+                   <p class="pregunta">¿Que tipo de pregunta o problema se puede escribir? <img src="{{ url_for('static', filename='img/suma.svg') }}" alt=""></p>
+                   <p class="respuesta">Se puede escribir cualquier pregunta que tenga sobre el servico o se puede escribir cualquier problema que 
+                       tiene con el servicio.
+                   </p>
+               </div>
+               <div class="contenedor-pregunta">
+                   <p class="pregunta">¿Como se que mi pregunta fue respondida? <img src="{{ url_for('static', filename='img/suma.svg') }}" alt=""> </p>
+                   <p class="respuesta">cuando el del soporte tecnico termine de responder, la respuesta seria enviada a la sección respuestas 
+                       donde podra calificar al tecnico para saber si le resulto util la respuesta.
+                   </p>
+               </div>
+           </div>
+       </div>
+   </section>
+</main>
+
+<script src="{{ url_for('static', filename='js/preguntasf.js') }}"></script>
+{% endblock %}

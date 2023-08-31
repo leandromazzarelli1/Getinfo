@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock %} </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a href="vcpregunta.html" class="enlance">
+            <img src= "{{ url_for('static', filename='img/logo.jpg') }}"alt="" class="logo">
+        </a>
+        <ul class="active">
+            <li><a href="#" class="active">Ver perfil</a></li>
+            <li><a href="vcpregunta.html">Preguntas</a></li>
+            <li><a href="vcrespuestas.html">Respuestas</a></li>
+            <li><a href="#">Cerrar sesion</a></li>
+        </ul>
+    </nav>
+    {%block body%}
+    {%endblock%}
+     
+</body>
+
+</html>

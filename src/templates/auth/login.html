@@ -1,0 +1,19 @@
+{% extends './baselogin.html' %}
+{% block title %}Get Info{% endblock %}
+{% block body %}
+    <h3>Bienvenido</h3>
+    <form action="/login" method="POST">
+        <div class="input-box">
+            <input type="text" name="username" placeholder="username" class="input-control" id="usuario" autocomplete="username">
+        </div>
+
+        <div class="input-box">
+            <input type="password" name="password" placeholder="password" class="input-control" id="contraseña" autocomplete="current-password">
+             <div class="input-link">
+                 <a href="recuperar.html" class="gradient-text">Has olvidado la contraseña?</a>
+            </div>
+        </div>
+        <button type="submit" class="btn" onclick="login()">Iniciar sesión</button>
+    </form>
+   <p>No tienes una cuenta? <a href="registro.html" class="gradient-text">Crear cuenta</a></p>
+{% endblock %}

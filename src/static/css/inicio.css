@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+:root {
+	--primario: #e23939;
+	--gris-claro: #B8B8B8;
+	--sombra: 0 0 13px 0 rgba(185,185,185, .25);
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav{
+    background: #2f4ccd;
+    height: 80px;
+    width: 100%;
+}
+
+.enlance{
+    position: absolute;
+    padding: 20px 50px;
+}
+
+.logo{
+    height: 40px;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0;
+}
+
+nav ul li a{
+    color: #fff;
+    font-size: 18px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+li a.active, li a:hover{
+    background: #000090;
+    transition: .5s;
+}
+
+.checkbtn{
+    font-size: 30px;
+    color: #fff;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display: none;
+}
+
+main {
+    max-width: 1000px;
+	width: 90%;
+	margin: 40px auto;
+}
+
+.formulario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    background-color: #fff;
+    padding: 50px 50px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    margin-top: 30px;
+    border-radius:25px;
+}
+
+.form h2{
+    text-align: center;
+    color: #2f4ccd;
+    font-size: 25px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+}
+.form-txt {
+    text-align: center;
+}
+
+textarea {
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+.form .btn{
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.contenedor-preguntas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+.contenedor-pregunta{
+    background: #fff;
+    padding: 40px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .3s ease all;
+    cursor: pointer;
+}
+
+.contenedor-pregunta:hover{
+    box-shadow: var(--sombra);
+}
+
+.contenedor-pregunta.activa{
+    border: 2px solid var(--primario);
+}
+
+.preguntas-frecuentes{
+	margin: 40px;
+}
+
+.preguntas h2{
+    text-align: center;
+    color: #2f4ccd;
+    font-size: 25px;
+}
+
+.pregunta {
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.respuesta {
+	color: #808080;
+	line-height: 30px;
+	max-height: 0;
+	opacity: 0;
+	transition: .3s ease all;
+}
+
+.contenedor-pregunta.activa .respuesta {
+	opacity: 1;
+	margin-top: 20px;
+}
+
+.contenedor-pregunta.activa img {
+	transform: rotate(45deg);
+}
+@media (max-width:952px){
+    .enlance{
+        padding-left: 20px;
+    }
+    nav ul li a{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 858px){
+    .checkbtn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #2c3e50;
+        top: 80px;
+        left: -100%;
+        text-align:center;
+        transition: all .5s;
+    }
+
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height:30 px;
+    }
+
+    li a.hover, li a.active{
+       background: none;
+       color:#000090;
+    }
+
+    #check:checked ~ ul{
+        left:0;
+    }
+}
