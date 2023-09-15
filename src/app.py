@@ -1,7 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from config import config
 from flask_mysqldb import MySQL
 
+#Carpetamodels:
+from models.ModelUser import ModelUser
+
+#entities:
+from models.entities.User import User
 app=Flask(__name__)
 
 db=MySQL(app)
@@ -17,13 +22,12 @@ def login():
         #print(request.form['username'])
         #print(request.form['password'])
         user = User(0, request.form['username'], request.form['password'])
-        logged_user = ModelUser.login(db,user)
-
+        logged_user = ModelUser.login(db, user)
         if logged_user != None:
-            if logged_user.password:
-                return redirect(url_for('perfilcliente'))
+            if logged_user:
+                return redirect(url_for('vcpregunta'))
             else:
-                flash("Credenciales incorrectas...")
+                flash("contraseña incorrecta...")
             return render_template ('auth/login.html')
         else:
             flash("Usuario no existente...")
@@ -32,6 +36,10 @@ def login():
         return render_template('auth/login.html')
     else:
         return render_template('auth/login.html')
+
+@app.route('/vcpregunta')
+def vcpregunta():
+    return render_template('auth/vcpregunta.html')
         
 
 if __name__=='__main__':
