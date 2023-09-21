@@ -1,5 +1,5 @@
 from .entities.User import User
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 class ModelUser():
 
@@ -18,3 +18,16 @@ class ModelUser():
                 return None
         except Exception as ex:
             raise Exception(ex)
+
+    @classmethod
+    def verificaruario(cls,user,db ):
+        try:
+            cursor =db.connection.cursor()
+            sql="""SELECT username FROM usuario
+             WHERE username = '{}' """.format(user.username)
+            cursor.execute(sql)
+            row = cursor.fetchone()
+        except Exception as ex:
+            raise Exception(ex)
+
+   

@@ -9,4 +9,11 @@ class User():
 
     @classmethod
     def check_password(self, hashed_password, password):
-        return check_password_hash(hashed_password, password,)
+        return check_password_hash(hashed_password, password)
+
+    @classmethod
+    def generar_hash(cls,password):
+        if password is None:
+            raise ValueError("Password cannot be None")
+        return generate_password_hash(password) 
+

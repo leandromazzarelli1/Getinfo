@@ -14,6 +14,28 @@ db=MySQL(app)
 @app.route('/')
 def index():
     return redirect(url_for('login'))
+
+@app.route('/signup', methods=['GET','POST'])
+def signup_create():
+    username = request.form.get('username')
+    fullname = request.form.get('fullname')
+    password = request.form.get('password')
+    user = User(username,password,fullname)
+
+    if ModelUser.verificaruario(user, db) != None:
+        flash('Usario existe, vuelva a registrarse o inicie sesion')
+        return redirect(url_for('signup_create'))
+    else:
+        try:
+            cursor =db.connection.cursor()
+            sql="""NSERT INTO `getinfo`.`usuario` (`username`, `password`, `fullname`)
+             VALUES ('{}', '{}', '{}')""".format(user.username, User.generar_hash(password) ,user.fullname)
+            cursor.execute(sql)
+            cursor.close()
+        except Exception as ex:
+            raise Exception(ex)
+        ModelUser.newuser(user,db)
+        return redirect (url_for('login'))
  
 @app.route('/login', methods=['GET','POST'])
 def login():

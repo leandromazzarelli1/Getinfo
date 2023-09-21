@@ -2,17 +2,17 @@
 {% block title %}Crear cuenta{% endblock %}
 {% block body %}
 <h3>Crear cuenta</h3>
-<form action="">
+<form method="POST" action="/signup">
     <div class="input-box">
-        <input type="text" placeholder="nombre completo" class="input-control">
+        <input type="text" name="username" placeholder="nombre de usuario" class="input-control">
     </div>
     <div class="input-box">
-        <input type="text" placeholder="Email" class="input-control">
+        <input type="text" name="fullname" placeholder="nombre completo" class="input-control">
      </div>
     <div class="input-box">
-        <input type="password" placeholder="Contraseña" class="input-control">
+        <input type="password" name="password" placeholder="Contraseña" class="input-control">
     </div>
     <button type="submit" class="btn">Crear cuenta</button>
 </form>
-<p>Ya tienes una cuenta? <a href="{{ url_for('templates', filename='index.html') }}" class="gradient-text">Iniciar sesión</a></p>
+<p>Ya tienes una cuenta? <a href="{{ url_for('login') }}" class="gradient-text">Iniciar sesión</a></p>
 {% endblock %}
