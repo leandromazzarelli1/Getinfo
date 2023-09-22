@@ -20,14 +20,29 @@ class ModelUser():
             raise Exception(ex)
 
     @classmethod
-    def verificaruario(cls,user,db ):
+    def verificar_usuario(cls,user,db ):
         try:
             cursor =db.connection.cursor()
             sql="""SELECT username FROM usuario
              WHERE username = '{}' """.format(user.username)
             cursor.execute(sql)
             row = cursor.fetchone()
+            if row == None:
+                return False
+            else:
+                return True
         except Exception as ex:
             raise Exception(ex)
 
-   
+    @classmethod
+    def crear_usuario(cls, user, db):
+        try:
+            cursor = db.connection.cursor()
+            sql = """INSERT INTO `getinfo`.`usuario` (`username`, `password`, `fullname`)
+                    VALUES ('{}', '{}', '{}')""".format(user.username, user.password, user.fullname)
+            cursor.execute(sql)
+            cursor.close()
+            db.connection.commit()
+        except Exception as ex:
+            raise Exception(ex)
+            

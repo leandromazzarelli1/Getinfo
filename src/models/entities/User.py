@@ -13,7 +13,5 @@ class User():
 
     @classmethod
     def generar_hash(cls,password):
-        if password is None:
-            raise ValueError("Password cannot be None")
         return generate_password_hash(password) 
 

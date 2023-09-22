@@ -15,34 +15,36 @@ db=MySQL(app)
 def index():
     return redirect(url_for('login'))
 
-@app.route('/signup', methods=['GET','POST'])
+@app.route('/signup', methods=['POST', 'GET'])
 def signup_create():
-    username = request.form.get('username')
-    fullname = request.form.get('fullname')
-    password = request.form.get('password')
-    user = User(username,password,fullname)
+    if request.method == 'POST':
+        username = request.form.get('username')
+        fullname = request.form.get('fullname')
+        password = request.form.get('password')
 
-    if ModelUser.verificaruario(user, db) != None:
-        flash('Usario existe, vuelva a registrarse o inicie sesion')
-        return redirect(url_for('signup_create'))
-    else:
-        try:
-            cursor =db.connection.cursor()
-            sql="""NSERT INTO `getinfo`.`usuario` (`username`, `password`, `fullname`)
-             VALUES ('{}', '{}', '{}')""".format(user.username, User.generar_hash(password) ,user.fullname)
-            cursor.execute(sql)
-            cursor.close()
-        except Exception as ex:
-            raise Exception(ex)
-        ModelUser.newuser(user,db)
-        return redirect (url_for('login'))
+        if password is None:
+            flash('Contraseña no proporcionada', 'danger')
+            return redirect(url_for('signup_create'))
+
+        password_hash = User.generar_hash(password)
+        user = User(0, username, password_hash, fullname)
+
+        if len(user.username) > 255:
+            flash('Nombre de usuario demasiado largo', 'danger')
+            return redirect(url_for('signup_create'))
+
+        if ModelUser.verificar_usuario(user, db):
+            flash('Usuario existe, vuelva a registrarse o inicie sesión', 'danger')
+            return redirect(url_for('signup_create'))
+        else:
+            ModelUser.crear_usuario(user, db)
+            return redirect(url_for('login'))
+    return render_template('auth/registro.html')
+
  
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login', methods=['GET','POST'])    
 def login():
     if request.method == 'POST':
-        
-        #print(request.form['username'])
-        #print(request.form['password'])
         user = User(0, request.form['username'], request.form['password'])
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
