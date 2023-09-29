@@ -22,6 +22,10 @@ def signup_create():
         fullname = request.form.get('fullname')
         password = request.form.get('password')
 
+        if username is None:
+            flash('Nombre de usuario vacio', 'danger')
+            return redirect(url_for('signup_create'))
+
         if password is None:
             flash('Contraseña no proporcionada', 'danger')
             return redirect(url_for('signup_create'))
