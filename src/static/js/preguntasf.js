@@ -18,3 +18,25 @@ preguntas.forEach((pregunta)=>{
 		});
     });
 });
+
+function checkEmptyText() {
+    const texto = document.getElementById("mensaje").value.trim();
+
+    if (texto === '') {
+		
+        document.getElementById('emptyTextAlert').style.display = 'block';
+    } else {
+       
+        $('#confirmModal').modal('show');
+        document.getElementById('emptyTextAlert').style.display = 'none';
+    }
+}
+
+
+
+document.getElementById('confirmSubmit').addEventListener('click', function() {
+    // Envía el formulario después de hacer clic en "Enviar" en la ventana modal
+    document.getElementById('myForm').submit();
+});
+
+

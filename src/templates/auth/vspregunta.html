@@ -2,4 +2,57 @@
 {% block title %}Perfil{% endblock %}
 {% block body %}
 
-{% endblock %}
+    <div class="container mt-5">
+
+        <div class="container mt-5">
+            <!-- Mostrar las preguntas -->
+            <h1 class="text-center mb-4">Listado de Preguntas</h1>
+
+            <div class="row">
+                {% for pregunta in preguntas %}
+                <div class="col-md-4 mb-3">
+                    <div class="card position-relative">
+                        <div class="card-header card-header-right">
+                            {{ pregunta[0] }} <!-- Fecha -->
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Pregunta o Problema</h5> 
+                            <p class="card-text">{{ pregunta[1] }}</p><!-- Descripción -->
+                            <button class="btn btn-primary btn-margin btn-responder">Responder</button>
+                            <button class="btn btn-success btn-margin">Agregar Dificultad</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+     
+    <!-- modal de la respuesta -->
+    <div class="modal fade" id="responderModal" tabindex="-1" role="dialog" aria-labelledby="responderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="responderModalLabel">Responder Pregunta</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <!-- -->
+            <form id="responderForm">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                <label for="respuestaTextarea">Tu Respuesta</label>
+                <textarea class="form-control" id="respuestaTextarea" rows="3" name="respuesta"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Respuesta</button>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+  
+
+{% endblock %}  

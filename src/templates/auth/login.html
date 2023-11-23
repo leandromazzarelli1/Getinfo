@@ -10,16 +10,18 @@
 
         
         <div class="input-box">
-            <input type="text" name="username" placeholder="nombre de usuario" class="input-control" id="usuario" autocomplete="username">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="text" name="username" placeholder="nombre de usuario" class="input-control" id="usuario" autocomplete="username" required>
         </div>
 
         <div class="input-box">
-            <input type="password" name="password" placeholder="password" class="input-control" id="contraseña" autocomplete="current-password">
+            <input type="password" name="password" placeholder="password" class="input-control" id="contraseña" autocomplete="current-password" required>
              <div class="input-link">
                  <a href="recuperar.html" class="gradient-text">Has olvidado la contraseña?</a>
             </div>
         </div>
         <button type="submit" class="btn" >Iniciar sesión</button> 
+        <br>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <br />

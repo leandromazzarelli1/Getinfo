@@ -13,59 +13,24 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-
-nav{
-    background: #2f4ccd;
-    height: 80px;
-    width: 100%;
+.navbar-dark .navbar-nav .nav-link {
+    color: #252222 !important; /* Cambia el color del texto a negro (#000) */
 }
 
-.enlance{
-    position: absolute;
-    padding: 20px 50px;
+.navbar-nav .nav-item .nav-link {
+    transition: background-color 0.5s; /* Transición solo para el color de fondo */
 }
 
-.logo{
-    height: 40px;
+.navbar-nav .nav-item .nav-link:hover,
+.navbar-nav .nav-item .nav-link.active {
+    background-color: #3e3ee9; /* Color de fondo al pasar el mouse o activo */
 }
 
-nav ul{
-    float: right;
-    margin-right: 20px;
+/* Estilos personalizados para el sombreado inferior del navbar */
+.navbar {
+    box-shadow: 0 4px 6px -6px #000;
 }
 
-nav ul li{
-    display: inline-block;
-    line-height: 80px;
-    margin: 0;
-}
-
-nav ul li a{
-    color: #fff;
-    font-size: 18px;
-    padding: 7px 13px;
-    border-radius: 3px;
-    text-transform: uppercase;
-}
-
-li a.active, li a:hover{
-    background: #000090;
-    transition: .5s;
-}
-
-.checkbtn{
-    font-size: 30px;
-    color: #fff;
-    float: right;
-    line-height: 80px;
-    margin-right: 40px;
-    cursor: pointer;
-    display: none;
-}
-
-#check{
-    display: none;
-}
 
 main {
     max-width: 1000px;
@@ -170,42 +135,75 @@ textarea {
 .contenedor-pregunta.activa img {
 	transform: rotate(45deg);
 }
-@media (max-width:952px){
-    .enlance{
-        padding-left: 20px;
-    }
-    nav ul li a{
-        font-size: 16px;
-    }
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /
 }
 
-@media (max-width: 858px){
-    .checkbtn{
-        display: block;
-    }
-    ul{
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        background: #2c3e50;
-        top: 80px;
-        left: -100%;
-        text-align:center;
-        transition: all .5s;
-    }
 
-    nav ul li{
-        display: block;
-        margin: 50px 0;
-        line-height:30 px;
-    }
+.textarea-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    li a.hover, li a.active{
-       background: none;
-       color:#000090;
-    }
+.textarea-container textarea {
+    font-size: 15px;
+    border-radius: 10px;
+    width: 100%; 
+    margin: 10px 0; 
+}
 
-    #check:checked ~ ul{
-        left:0;
+.form .btn {
+    font-size: 20px;
+    border-radius: 5px;
+    border-color: #141414;
+}
+
+textarea {
+    padding: 10px; 
+}
+
+
+/* estilo personalizado de la targeta para la pregunta */
+
+.card-header-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgb(231, 240, 111);
+    padding: 5px 10px;
+    border-radius: 0 0 0.25rem 0;
+    font-size: 12px;
+    margin-bottom: 15px; /* Aumenta la separación con la descripción */
+}
+.card-body {
+    margin-top: 15px; /* Aumenta la separación con la fecha */
+}
+.btn-margin {
+    margin-top: 10px; /* Espaciado entre botones y la descripción */
+}
+
+footer {
+    box-shadow: 0 4px 6px -6px #000;
+    background-color: #2f4ccd;
+    color: #141414;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px; /* Altura del footer, ajusta según necesites */
+    text-align: center;
+    padding: 10px 0;
+}
+@media (max-width: 768px) {
+    
+    .textarea-container textarea {
+        width: 100%; 
+    }
+    footer {
+        position: static;
     }
 }
