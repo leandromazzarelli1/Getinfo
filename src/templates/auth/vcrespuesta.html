@@ -1,5 +1,48 @@
-{% extends './baseinicio.html' %}
-{% block title %}Perfil{% endblock %}
+{% extends "baseinicio.html" %}
+{% block title %}Tus Respuestas{% endblock %}
 {% block body %}
-
+<main>
+    <section>
+        <div class="respuestas-container">
+            <h2>Tus Respuestas Estáticas</h2>
+            <div class="respuesta">
+                <div class="respuesta-content">
+                    <h3 class="respuesta-titulo">Título de la pregunta 1</h3>
+                    <p>Esta es una respuesta estática a la pregunta 1.</p>
+                    <div class="puntuacion">
+                        <label for="puntuacion1">Califica esta respuesta:</label>
+                        <input type="range" id="puntuacion1" name="puntuacion1" min="1" max="10">
+                    </div>
+                </div>
+            </div>
+            <div class="respuesta">
+                <div class="respuesta-content">
+                    <h3 class="respuesta-titulo">Título de la pregunta 2</h3>
+                    <p>Esta es otra respuesta estática a una pregunta. Recuerda calificar la respuesta después de revisarla.</p>
+                    <div class="puntuacion">
+                        <label for="puntuacion2">Califica esta respuesta:</label>
+                        <input type range" id="puntuacion2" name="puntuacion2" min="1" max="10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="respuestas-container">
+            <h2>Tus Respuestas Dinámicas</h2>
+            {% for respuesta in respuestas %}
+            <div class="respuesta">
+                <div class="respuesta-content">
+                    <h3 class="respuesta-titulo">{{ respuesta[0] }}</h3>
+                    <p>{{ respuesta[1] }}</p>
+                    <div class="puntuacion">
+                        <label for="puntuacion{{ loop.index }}">Califica esta respuesta:</label>
+                        <input type="range" id="puntuacion{{ loop.index }}" name="puntuacion{{ loop.index }}" min="1" max="10">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
 {% endblock %}
