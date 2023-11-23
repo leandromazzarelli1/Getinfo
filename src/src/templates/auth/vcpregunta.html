@@ -1,0 +1,76 @@
+{% extends './baseinicio.html' %}
+{% block title %}Perfil{% endblock %}
+{% block body %}
+<main>
+    <section >
+        <form class="form" method="POST" id="myForm">
+            
+            <h2>Get Info</h2>
+            <div class="form-txt">
+                <a>Ingrese su pregunta o problema</a>
+            </div>
+            
+            <div class="alert alert-danger alert-dismissible fade show" id="emptyTextAlert" style="display: none;">
+                El campo de texto no puede estar vacío.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="textarea-container">
+                <textarea name="problema" id="mensaje" cols="90" rows="10" placeholder="Empeza a contarnos..."></textarea>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" onclick="checkEmptyText()">
+                    Enviar Pregunta
+                </button>
+            </div>
+        </form>
+   </section>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de enviar esta pregunta?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmSubmit">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <section class="preguntas-frecuentes">
+       <div class="preguntas">
+           <h2>Preguntas Frecuentes</h2>
+           <div class="contenedor-preguntas">
+               <div class="contenedor-pregunta ">
+                   <p class="pregunta">¿Que tipo de pregunta o problema se puede escribir? <img src="{{ url_for('static', filename='img/suma.svg') }}" alt=""></p>
+                   <p class="respuesta">Se puede escribir cualquier pregunta que tenga sobre el servico o se puede escribir cualquier problema que 
+                       tiene con el servicio.
+                   </p>
+               </div>
+               <div class="contenedor-pregunta">
+                   <p class="pregunta">¿Como se que mi pregunta fue respondida? <img src="{{ url_for('static', filename='img/suma.svg') }}" alt=""> </p>
+                   <p class="respuesta">cuando el del soporte tecnico termine de responder, la respuesta seria enviada a la sección respuestas 
+                       donde podra calificar al tecnico para saber si le resulto util la respuesta.
+                   </p>
+               </div>
+           </div>
+       </div>
+   </section>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='js/preguntasf.js') }}"></script>
+{% endblock %}

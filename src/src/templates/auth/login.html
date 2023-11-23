@@ -1,0 +1,41 @@
+{% extends './baselogin.html' %}
+{% block title %}Get Info{% endblock %}
+{% block customCSS %}
+
+
+{% endblock %}
+{% block body %}
+    <h3>Bienvenido</h3>
+    <form action="/login" method="POST">
+
+        
+        <div class="input-box">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="text" name="username" placeholder="nombre de usuario" class="input-control" id="usuario" autocomplete="username" required>
+        </div>
+
+        <div class="input-box">
+            <input type="password" name="password" placeholder="password" class="input-control" id="contraseña" autocomplete="current-password" required>
+             <div class="input-link">
+                 <a href="recuperar.html" class="gradient-text">Has olvidado la contraseña?</a>
+            </div>
+        </div>
+        <button type="submit" class="btn" >Iniciar sesión</button> 
+        <br>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>        
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </form>
+   <p>No tienes una cuenta? <a href="{{ url_for ('signup_create') }}" class="gradient-text">Crear cuenta</a></p>
+
+{%endblock%}

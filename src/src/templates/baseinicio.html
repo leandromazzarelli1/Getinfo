@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock %} </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="" height="40">
+        </a>
+
+        <div class="d-flex flex-grow-1 justify-content-center align-items-center">
+            <span class="navbar-text mx-auto">
+                <span class="navbar-brand mb-0 h1"  style="font-size: 2.5rem;" >Getinfo</span>
+            </span>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if current_user.role == "usuario" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ver perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for ('pregunta.vcpregunta') }}">Preguntas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vcrespuestas.html">Respuestas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for ('logout') }}">Cerrar sesión</a>
+                    </li>
+                {% endif %}
+
+                {% if current_user.role == "soporte" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ver perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for ('pregunta.vspregunta') }}">Preguntas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="vsrespuesta.html">Respuestas</a>
+                    </li>
+                    {% if current_user.esadmi == 1 %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for ('soporte.crear_soporte') }}">Crear soporte</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for ('logout') }}">Cerrar sesión</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+   
+    {%block body%}
+    {%endblock%}
+     
+    <br>
+    <br>
+    <footer>
+        <p> Copyright © 2023    Version en español</p>
+    </footer>
+    
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Popper.js (necesario para los componentes JavaScript de Bootstrap) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Bootstrap 4 (importante para saber q clases usar)JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/soporte.js') }}"></script>
+</body>
+
+</html>
