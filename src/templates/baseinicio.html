@@ -39,7 +39,7 @@
                         <a class="nav-link" href="{{ url_for ('pregunta.vcpregunta') }}">Preguntas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="vcrespuestas.html">Respuestas</a>
+                        <a class="nav-link" href="{{ url_for ('pregunta.vcrespuesta') }}">Respuestas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for ('logout') }}">Cerrar sesión</a>
@@ -52,9 +52,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for ('pregunta.vspregunta') }}">Preguntas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="vsrespuesta.html">Respuestas</a>
                     </li>
                     {% if current_user.esadmi == 1 %}
                         <li class="nav-item">
@@ -87,7 +84,12 @@
 <!-- Bootstrap 4 (importante para saber q clases usar)JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script src="{{ url_for('static', filename='js/soporte.js') }}"></script>
+{%if current_user.role=="soporte" %}
+    <script src="{{ url_for('static', filename='js/soporte.js') }}"></script>
+{%endif%}
+{%if current_user.role=="usuario" %}
+    <script src="{{ url_for('static', filename='js/usuario.js') }}"></script>
+{%endif%}
 </body>
 
 </html>

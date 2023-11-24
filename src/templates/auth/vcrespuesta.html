@@ -1,5 +1,46 @@
-{% extends './baseinicio.html' %}
-{% block title %}Perfil{% endblock %}
+{% extends 'baseinicio.html' %}
+{% block title %}Tus Respuestas{% endblock %}
+
 {% block body %}
+<main>
+    <div class="container">
+        <h2>Tus Respuestas</h2>
+        <div class="row">
+            {% for respuesta in respuestas %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Respuesta del tecnico</h5>
+                            <span class="d-none">ID respuesta: {{ respuesta[0] }}</span>
+                            <p class="card-text">Respuesta: {{ respuesta[1] }}</p>
+                            <span class="d-none">ID respuesta: {{ respuesta[2] }}</span>
+                            <p class="card-text">Nombre: {{ respuesta[3] }}</p>
+                            <button type="button" class="btn btn-primary calificar-btn" data-respuesta-id="{{ respuesta[0] }}">
+                                Calificar Respuesta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+<!-- Modal para calificar respuesta -->
+<div class="modal fade" id="calificarModal" tabindex="-1" role="dialog" aria-labelledby="calificarModalTitle" aria-hidden="true">
+    <!-- ...código del modal previo... -->
+    <div class="modal-body">
+        <!-- Contenido del formulario para calificar la respuesta -->
+        <form id="calificarForm">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="puntuacion">Puntuación (1-10):</label>
+                <input type="number" class="form-control" id="puntuacion" name="puntuacion" min="1" max="10">
+            </div>
+            <!-- Otros campos ocultos que puedan necesitarse -->
+            <button type="submit" class="btn btn-primary">Enviar Calificación</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

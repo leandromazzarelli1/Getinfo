@@ -76,3 +76,43 @@ def respuesta():
         return jsonify({'message': 'Respuesta recibida con éxito'})
 
     return jsonify({'error': 'Error al procesar la solicitud'})
+
+@pregunta.route('/vcrespuesta', methods=['POST', 'GET'])
+@login_required
+def vcrespuesta():
+    
+    db = current_app.db
+    cursor = db.connection.cursor()
+    sql = """SELECT r.idrespuesta, r.descripcion, r.idsoportet, s.fullname
+                FROM respuesta AS r
+                INNER JOIN soportet AS s ON r.idsoportet = s.idsoportet"""
+    cursor.execute(sql)
+    respuestas = cursor.fetchall()
+    cursor.close()
+     # Verifica que los datos se impriman correctamente en la consola
+    # También puedes usar logging para registrar los datos
+    
+    return render_template('auth/vcrespuesta.html', respuestas=respuestas)
+
+@pregunta.route('/calificar', methods=['POST'])
+@login_required
+def calificar():
+    if request.method == 'POST':
+        idusuario = current_user.id
+        formData = request.json 
+        puntuacion = None
+        for data in formData:
+            
+            if data['name'] == 'puntuacion':
+                puntuacion = data['value']
+        # Procesar y guardar los datos en la base de datos (Asegúrate de hacer esto de forma segura)
+        db = current_app.db
+        cursor = db.connection.cursor()
+        sql = """INSERT INTO calificacion (idusuario, punto) VALUES (%s, %s)"""
+        cursor.execute(sql, (idusuario, puntuacion))
+        db.connection.commit()
+        cursor.close()
+
+        return jsonify({'message': 'Calificación recibida con éxito'})
+
+    return jsonify({'error': 'Error al procesar la solicitud'})

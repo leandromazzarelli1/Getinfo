@@ -48,15 +48,15 @@ def signup_create():
             flash('Contraseña no proporcionada', 'danger')
             return redirect(url_for('signup_create'))
 
-        if len(user.username) > 255:
+        if len(username) > 255:
             flash('Nombre de usuario demasiado largo', 'danger')
             return redirect(url_for('signup_create'))
 
-        if ModelUser.es_usuario(user.username, db):
+        if ModelUser.es_usuario(username, db):
             flash('Usuario existe, vuelva a registrarse o inicie sesión', 'danger')
             return redirect(url_for('signup_create'))
         else:
-            if ModelUser.es_soporte(user.username, db):
+            if ModelUser.es_soporte(username, db):
                 flash ('Usuario existe, vuelva a registrarse o inicie sesión', 'danger')
                 return redirect(url_for('signup_create'))
             else:    
